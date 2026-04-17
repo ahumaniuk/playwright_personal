@@ -52,6 +52,25 @@ export default defineConfig({
       use: { ...devices['Desktop Safari'] },
     },
 
+
+    
+    {
+      name: 'ui',
+      use: {
+        baseURL: 'https://www.saucedemo.com',
+        browserName: 'chromium',
+      },
+      testMatch: /.*\.ui\.spec\.js/,
+    },
+
+    {
+      name: 'api',
+      use: {
+        baseURL: 'https://jsonplaceholder.typicode.com',
+      },
+      testMatch: /.*\.api\.spec\.js/,
+    },
+
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
