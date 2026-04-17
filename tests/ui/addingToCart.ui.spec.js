@@ -1,4 +1,5 @@
 import {test, expect} from "playwright/test"
+import { login, addBackpackToCart } from "../utils/utils_cart.ui.js";
 
 test.beforeEach(async ({ page }) => {
   // Go to the starting url before each test and perform login
@@ -20,6 +21,9 @@ test.describe('Add product to cart', () => {
     })
     
     test('ID=3, Title="Verify removing product from cart"', {tag: '@smoke'}, async ({page}) => {
+        await addBackpackToCart(page);
+        await page.locator('[data-test="shopping-cart-link"]').click();
+        const cartItem = page.locator('.cart_item');
         await page.locator('[data-test="remove-sauce-labs-backpack"]').click();
         await expect(cartItem.filter({ hasText: 'Sauce Labs Backpack' })).not.toBeVisible();
     })
