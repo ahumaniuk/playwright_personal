@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
+import { config } from './config/env.config.js';
 
 /**
  * Read environment variables from file.
@@ -28,7 +29,7 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
-    baseURL: 'https://www.saucedemo.com/', 
+    baseURL: config.baseURL, 
     headless: process.env.CI ? true : false,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
@@ -52,12 +53,11 @@ export default defineConfig({
     //   use: { ...devices['Desktop Safari'] },
     // },
 
-
     
     {
       name: 'ui',
       use: {
-        baseURL: 'https://www.saucedemo.com',
+        baseURL: config.baseURL,
         browserName: 'chromium',
       },
       testMatch: /.*\.ui\.spec\.js/,
