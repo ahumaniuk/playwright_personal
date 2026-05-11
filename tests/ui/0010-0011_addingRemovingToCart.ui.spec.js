@@ -7,7 +7,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('Add product to cart', () => {
-    test('ID=2, Title="Verify adding product to cart"', {tag: '@smoke'}, async ({page}) => {
+    test('ID=0010, Title="Verify adding product to cart"', {tag: '@smoke'}, async ({page}) => {
         // select product and add to cart
         await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
         // verify the cart icon shows the correct number of items
@@ -20,7 +20,7 @@ test.describe('Add product to cart', () => {
     
     })
     
-    test('ID=3, Title="Verify removing product from cart"', {tag: '@smoke'}, async ({page}) => {
+    test('ID=0011, Title="Verify removing product from cart"', {tag: '@smoke'}, async ({page}) => {
         await addBackpackToCart(page);
         await page.locator('[data-test="shopping-cart-link"]').click();
         const cartItem = page.locator('.cart_item');

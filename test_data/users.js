@@ -10,5 +10,13 @@ export const users = {
     problem: {
         username: 'problem_user',
         password: 'secret_sauce'
+    },
+    invalid: {
+        username: 'standard_user',
+        password: '11111'
+    },
+    locked: {
+        username: 'locked_out_user',
+        password: 'secret_sauce'
     }
 };
