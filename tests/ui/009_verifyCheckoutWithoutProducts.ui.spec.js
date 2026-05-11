@@ -26,7 +26,7 @@ test.describe('Tests with negative scenarios on checkout', () => {
             await inventoryPage.cartIcon.click();
             // Expected result: Cart page is displayed, products are not displayed
             await expect(cartPage.cartItem).toBeHidden();
-            await expect(cartPage.cartList).toBeEmpty();
+            await expect(cartPage.inventoryItem).toHaveCount(0);
 
             // Click on the "Checkout" button
             await cartPage.checkoutButton.click();
