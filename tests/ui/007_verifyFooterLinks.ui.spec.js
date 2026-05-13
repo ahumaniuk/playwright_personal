@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from '../../pages/loginPage.js';
+import { LoginPage } from '../../pages/LoginPage.js';
 import { InventoryPage } from '../../pages/InventoryPage.js';
 import { users } from '../../test_data/users.js';
 import { login } from "../utils/utils_cart.ui.js";
