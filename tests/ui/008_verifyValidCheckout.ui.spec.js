@@ -5,7 +5,7 @@ import { CartPage } from "../../pages/CartPage.js";
 import { CheckOutPage } from "../../pages/CheckOutPage.js";
 import { CheckOut2Page } from "../../pages/CheckOut2Page.js";
 import { CheckOutCompletePage } from "../../pages/CheckOutCompletePage.js";
-import { users } from "../../env/test_data/users.js";
+import { users, checkoutUser } from "../../env/test_data/users.js";
 import { login } from "../utils/utils_cart.ui.js";
 
 test.describe("Verify Valid Checkout", () => {
@@ -22,17 +22,16 @@ test.describe("Verify Valid Checkout", () => {
       const checkOutPage = new CheckOutPage(page);
       const checkOut2Page = new CheckOut2Page(page);
       const checkOutCompletePage = new CheckOutCompletePage(page);
-      await inventoryPage.addToCartBackpackButton.click();
+
+      await inventoryPage.addProductToCart();
       await expect(inventoryPage.shoppingCartBadge).toHaveText("1");
-      await inventoryPage.shoppingCartBadge.click();
+      await inventoryPage.openCart();
       await expect(inventoryPage.shoppingCartBadge).toHaveText("1");
 
       await expect(cartPage.cartItem).toHaveText("Sauce Labs Backpack");
       await cartPage.checkoutButton.click();
       await expect(page).toHaveURL(process.env.CHECKOUT_STEP_ONE_PAGE_URL);
-      await checkOutPage.firstNameInput.fill("Anastasiia");
-      await checkOutPage.lastNameInput.fill("Koval");
-      await checkOutPage.postalCodeInput.fill("12345");
+      await checkOutPage.fillCheckoutInformation(checkoutUser);
       await checkOutPage.continueButton.click();
       await expect(page).toHaveURL(process.env.CHECKOUT_STEP_TWO_PAGE_URL);
 
@@ -47,7 +46,7 @@ test.describe("Verify Valid Checkout", () => {
       await expect(checkOutCompletePage.completeHeader).toHaveText(
         "Thank you for your order!",
       );
-      await checkOutCompletePage.backHomeButton.click();
+      await checkOutCompletePage.returnToHomePage();
       await expect(page).toHaveURL(process.env.INVENTORY_PAGE_URL);
       await expect(inventoryPage.shoppingCartBadge).toBeHidden();
     },

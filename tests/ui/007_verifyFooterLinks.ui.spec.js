@@ -15,31 +15,30 @@ test.describe("Verify Footer", () => {
     async ({ page, context }) => {
       const inventoryPage = new InventoryPage(page);
 
-      const [twitterPage] = await Promise.all([
-        context.waitForEvent("page"),
-        inventoryPage.twitterLink.click(),
-      ]);
-      await twitterPage.waitForLoadState();
+      const twitterPage = await inventoryPage.openExternalPage(
+        context,
+        inventoryPage.twitterLink,
+      );
+
       await expect(twitterPage).toHaveURL("https://x.com/saucelabs");
       await twitterPage.close();
       await expect(page).toHaveURL(process.env.INVENTORY_PAGE_URL);
 
-      const [facebookPage] = await Promise.all([
-        context.waitForEvent("page"),
-        inventoryPage.facebookLink.click(),
-      ]);
-      await facebookPage.waitForLoadState();
+      const facebookPage = await inventoryPage.openExternalPage(
+        context,
+        inventoryPage.facebookLink
+      );
       await expect(facebookPage).toHaveURL(
         "https://www.facebook.com/saucelabs",
       );
       await facebookPage.close();
       await expect(page).toHaveURL(process.env.INVENTORY_PAGE_URL);
 
-      const [linkedInPage] = await Promise.all([
-        context.waitForEvent("page"),
-        inventoryPage.linkedInLink.click(),
-      ]);
-      await linkedInPage.waitForLoadState();
+      const linkedInPage = await inventoryPage.openExternalPage(
+        context,
+        inventoryPage.linkedInLink
+      );
+      
       await expect(linkedInPage).toHaveURL(
         "https://www.linkedin.com/company/sauce-labs/",
       );

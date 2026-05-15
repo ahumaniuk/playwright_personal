@@ -5,4 +5,7 @@ export class CheckOutCompletePage {
         this.completeHeader = page.locator('[data-test="complete-header"]');
         this.backHomeButton = page.locator('[data-test="back-to-products"]');
     }
+    async returnToHomePage() {
+        await this.backHomeButton.click();
+    }
 }

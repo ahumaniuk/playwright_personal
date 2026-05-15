@@ -20,7 +20,7 @@ test.describe("Tests with negative scenarios on checkout", () => {
       const checkOutPage = new CheckOutPage(page);
       await expect(inventoryPage.shoppingCartBadge).toBeHidden();
 
-      await inventoryPage.cartIcon.click();
+      await inventoryPage.openCart();
       await expect(cartPage.cartItem).toBeHidden();
       await expect(cartPage.inventoryItem).toHaveCount(0);
 

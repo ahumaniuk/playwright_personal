@@ -11,7 +11,7 @@ test.describe("Verify sorting", () => {
     page,
   }) => {
     const inventoryPage = new InventoryPage(page);
-    await inventoryPage.sortingDropdown.selectOption("lohi");
+    await inventoryPage.setSortingFromLowToHigh()
     const prices = await inventoryPage.inventoryPrices.allTextContents();
     const priceNumbers = prices.map((p) => parseFloat(p.replace("$", "")));
     const sorted = [...priceNumbers].sort((a, b) => a - b);
@@ -22,7 +22,7 @@ test.describe("Verify sorting", () => {
     page,
   }) => {
     const inventoryPage = new InventoryPage(page);
-    await inventoryPage.sortingDropdown.selectOption("hilo");
+    await inventoryPage.setSortingFromHighToLow()
     const prices = await inventoryPage.inventoryPrices.allTextContents();
     const priceNumbers = prices.map((p) => parseFloat(p.replace("$", "")));
     const sorted = [...priceNumbers].sort((a, b) => b - a);
@@ -35,7 +35,7 @@ test.describe("Verify sorting", () => {
     const inventoryPage = new InventoryPage(page);
     const stateOfSorting = await inventoryPage.inventoryItemNames;
 
-    await inventoryPage.sortingDropdown.selectOption("az");
+    await inventoryPage.setSortingFromAtoZ();
 
     const after = await stateOfSorting.allTextContents();
 
@@ -54,7 +54,7 @@ test.describe("Verify sorting", () => {
 
     const before = await stateOfSorting.allTextContents();
 
-    await inventoryPage.sortingDropdown.selectOption("za");
+    await inventoryPage.setSortingFromZtoA();
 
     const after = await stateOfSorting.allTextContents();
 

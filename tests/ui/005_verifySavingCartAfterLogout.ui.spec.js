@@ -17,8 +17,8 @@ test.describe("Verify saving cart after logout", () => {
     const cartPage = new CartPage(page);
     await inventoryPage.addToCartBackpackButton.click();
     await expect(inventoryPage.shoppingCartBadge).toHaveText("1");
-    await inventoryPage.burgerMenuButton.click();
-    await inventoryPage.logoutButton.click();
+    await inventoryPage.openMenu();
+    await inventoryPage.logOut();
     await expect(page).toHaveURL(process.env.BASE_URL);
     const loginPage = new LoginPage(page);
     await expect (loginPage.usernameInput).toBeEmpty();
@@ -28,7 +28,7 @@ test.describe("Verify saving cart after logout", () => {
     await expect(page).toHaveURL(process.env.INVENTORY_PAGE_URL);
     await expect(inventoryPage.inventoryList).toBeVisible();
     await expect(inventoryPage.shoppingCartBadge).toHaveText("1");
-    await inventoryPage.cartIcon.click();
+    await inventoryPage.openCart();
     await expect(page).toHaveURL(process.env.CART_PAGE_URL);
     await expect(cartPage.shoppingCart).toBeVisible();
     await expect(cartPage.shoppingCart).toHaveText("1");

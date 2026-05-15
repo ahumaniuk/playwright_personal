@@ -20,3 +20,9 @@ export const users = {
         password: 'secret_sauce'
     }
 };
+
+export const checkoutUser = {
+  firstName: "Anastasiia",
+  lastName: "Humaniuk",
+  zipCode: "79000",
+};
