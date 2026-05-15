@@ -3,8 +3,9 @@ export class InventoryPage {
         this.page = page;
         // locators
         this.burgerMenuButton = page.locator('#react-burger-menu-btn');
+        this.burgerContainer = page.locator('.bm-menu');
         this.menuItems = page.locator('.bm-menu .bm-item.menu-item');
-        this.LogoutButton = page.locator('[data-test="logout-sidebar-link"]');
+        this.logoutButton = page.locator('[data-test="logout-sidebar-link"]'); 
 
         this.inventoryList = page.locator('[data-test="inventory-list"]');
         this.inventoryContainer = page.locator('#inventory_container');
