@@ -1,12 +1,14 @@
 import { test, expect } from "@playwright/test";
 import { LoginPage } from "../../pages/LoginPage.js";
 import { InventoryPage } from "../../pages/InventoryPage.js";
-import { users } from "../../env/test_data/users.js";
-import { login } from "../utils/utils_cart.ui.js";
+import { checkoutUser  } from "../../test_data/users.js";
+import { config } from "../../config/env.config.js";
 
 test.describe("Verify Footer", () => {
   test.beforeEach(async ({ page }) => {
-    await login(page);
+    const loginPage = new LoginPage(page);
+    await loginPage.open();
+    await loginPage.login(config.users.standard.username, config.users.standard.password);
   });
 
   test(

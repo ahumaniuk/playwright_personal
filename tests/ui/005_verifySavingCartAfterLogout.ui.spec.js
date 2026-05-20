@@ -2,12 +2,14 @@ import { test, expect } from "@playwright/test";
 import { LoginPage } from "../../pages/LoginPage.js";
 import { InventoryPage } from "../../pages/InventoryPage.js";
 import { CartPage } from "../../pages/CartPage.js";
-import { users } from "../../env/test_data/users.js";
-import { login } from "../utils/utils_cart.ui.js";
+import { config } from "../../config/env.config.js";
+
 
 test.describe("Verify saving cart after logout", () => {
   test.beforeEach(async ({ page }) => {
-    await login(page);
+    const loginPage = new LoginPage(page);
+    await loginPage.open();
+    await loginPage.login(config.users.standard.username, config.users.standard.password);
   });
 
   test('ID=005, Title="Verify that the cart is saved after logout"', async ({
@@ -24,7 +26,8 @@ test.describe("Verify saving cart after logout", () => {
     await expect (loginPage.usernameInput).toBeEmpty();
     await expect (loginPage.passwordInput).toBeEmpty();
    
-    await login(page);
+    await loginPage.open();
+    await loginPage.login(config.users.standard.username, config.users.standard.password);
     await expect(page).toHaveURL(process.env.INVENTORY_PAGE_URL);
     await expect(inventoryPage.inventoryList).toBeVisible();
     await expect(inventoryPage.shoppingCartBadge).toHaveText("1");
