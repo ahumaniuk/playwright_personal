@@ -28,7 +28,7 @@ test.describe("Tests with negative scenarios on checkout", () => {
 
       await cartPage.checkoutButton.click();
 
-      await expect(page).toHaveURL(process.env.CART_PAGE_URL);
+      await expect(page).toHaveURL(`${config.baseURL}inventory.html`);
       await expect(page.locator('[data-test="error"]')).toHaveText(
         "Your cart is empty",
       );

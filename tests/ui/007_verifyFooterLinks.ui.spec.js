@@ -24,7 +24,7 @@ test.describe("Verify Footer", () => {
 
       await expect(twitterPage).toHaveURL("https://x.com/saucelabs");
       await twitterPage.close();
-      await expect(page).toHaveURL(process.env.INVENTORY_PAGE_URL);
+      await expect(page).toHaveURL(`${config.baseURL}inventory.html`);
 
       const facebookPage = await inventoryPage.openExternalPage(
         context,
@@ -34,7 +34,7 @@ test.describe("Verify Footer", () => {
         "https://www.facebook.com/saucelabs",
       );
       await facebookPage.close();
-      await expect(page).toHaveURL(process.env.INVENTORY_PAGE_URL);
+      await expect(page).toHaveURL(`${config.baseURL}inventory.html`);
 
       const linkedInPage = await inventoryPage.openExternalPage(
         context,
@@ -45,7 +45,7 @@ test.describe("Verify Footer", () => {
         "https://www.linkedin.com/company/sauce-labs/",
       );
       await linkedInPage.close();
-      await expect(page).toHaveURL(process.env.INVENTORY_PAGE_URL);
+      await expect(page).toHaveURL(`${config.baseURL}inventory.html`);
     },
   );
 });

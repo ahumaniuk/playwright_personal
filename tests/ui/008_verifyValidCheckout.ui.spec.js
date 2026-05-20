@@ -32,10 +32,10 @@ test.describe("Verify Valid Checkout", () => {
 
       await expect(cartPage.cartItem).toHaveText("Sauce Labs Backpack");
       await cartPage.checkoutButton.click();
-      await expect(page).toHaveURL(process.env.CHECKOUT_STEP_ONE_PAGE_URL);
+      await expect(page).toHaveURL(`${config.baseURL}checkout-step-one.html`);
       await checkOutPage.fillCheckoutInformation(checkoutUser);
       await checkOutPage.continueButton.click();
-      await expect(page).toHaveURL(process.env.CHECKOUT_STEP_TWO_PAGE_URL);
+      await expect(page).toHaveURL(`${config.baseURL}checkout-step-two.html`);
 
       await expect(checkOut2Page.inventoryItemName).toHaveText(
         "Sauce Labs Backpack",
@@ -43,13 +43,13 @@ test.describe("Verify Valid Checkout", () => {
       await expect(checkOut2Page.summaryTotalLabel).toHaveText("Total: $32.39");
       await expect(checkOut2Page.finishButton).toBeVisible();
       await checkOut2Page.finishButton.click();
-      await expect(page).toHaveURL(process.env.CHECKOUT_COMPLETE_PAGE_URL);
+      await expect(page).toHaveURL(`${config.baseURL}checkout-complete.html`);
 
       await expect(checkOutCompletePage.completeHeader).toHaveText(
         "Thank you for your order!",
       );
       await checkOutCompletePage.returnToHomePage();
-      await expect(page).toHaveURL(process.env.INVENTORY_PAGE_URL);
+      await expect(page).toHaveURL(`${config.baseURL}inventory.html`);
       await expect(inventoryPage.shoppingCartBadge).toBeHidden();
     },
   );

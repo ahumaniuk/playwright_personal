@@ -21,14 +21,14 @@ test.describe("Verify saving cart after logout", () => {
     await expect(inventoryPage.shoppingCartBadge).toHaveText("1");
     await inventoryPage.openMenu();
     await inventoryPage.logOut();
-    await expect(page).toHaveURL(process.env.BASE_URL);
+    await expect(page).toHaveURL(`${config.baseURL}`);
     const loginPage = new LoginPage(page);
     await expect (loginPage.usernameInput).toBeEmpty();
     await expect (loginPage.passwordInput).toBeEmpty();
    
     await loginPage.open();
     await loginPage.login(config.users.standard.username, config.users.standard.password);
-    await expect(page).toHaveURL(process.env.INVENTORY_PAGE_URL);
+    await expect(page).toHaveURL(`${config.baseURL}inventory.html`);
     await expect(inventoryPage.inventoryList).toBeVisible();
     await expect(inventoryPage.shoppingCartBadge).toHaveText("1");
     await inventoryPage.openCart();
